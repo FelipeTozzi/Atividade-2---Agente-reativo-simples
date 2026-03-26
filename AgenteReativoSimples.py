@@ -1,4 +1,4 @@
-#Grupo: Mateus Euzébio, Felipe Tozzi Marinho de Oliveira, Ivan de Oliveira Nantes
+#Grupo: Felipe Tozzi Marinho de Oliveira, Ivan de Oliveira Nantes
 
 import random
 
