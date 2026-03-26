@@ -2,37 +2,32 @@
 
 import random
 
-linhas, colunas = 5, 5
+campo = 10
 
 limite_movimentos = 500
 
-ambiente = [[" " for _ in range(colunas)] for _ in range(linhas)]
+ambiente = [" " for _ in range(campo)]
 
 qtd_sujeira = random.randint(2, 6)
 
-posicoes = set()
-while len(posicoes) < qtd_sujeira:
-    x = random.randint(0, linhas - 1)
-    y = random.randint(0, colunas - 1)
-    posicoes.add((x, y))
+posicoes = random.sample(range(campo), qtd_sujeira)
 
-for (x, y) in posicoes:
-    ambiente[x][y] = "~"
+for (pos) in posicoes:
+    ambiente[pos] = "~"
 
-robo = [random.randint(0, linhas - 1), random.randint(0, colunas - 1)]
+robo = random.randint(0, campo - 1)
 
 
 def mostrar():
-    for i in range(linhas):
-        for j in range(colunas):
-            if [i, j] == robo:
-                print("R", end=" ")
-            else:
-                print(ambiente[i][j], end=" ")
-        print()
-    print("-" * 20)
+    for i in range(campo):
+        if i == robo:
+            print("R", end=" ")
+        else:
+            print(ambiente[i], end=" ")
+    print()
+    print("-" * 30)
 
-movimentos = [(-1,0), (1,0), (0,-1), (0,1)]
+movimentos = [-1,1]
 
 passos = 0
 
@@ -41,19 +36,18 @@ while passos < limite_movimentos:
     
     input("Pausado, turno - " + str(passos) + " limite " + str(limite_movimentos))
 
-    x, y = robo
+    x = robo
 
-    if ambiente[x][y] == "~":
-        print(f"Posição ({x}, {y}) limpa")
-        ambiente[x][y] = " "
+    if ambiente[robo] == "~":
+        print(f"Posição ({robo}) limpa")
+        ambiente[robo] = " "
     
     else:
-        dx, dy = random.choice(movimentos)
-        novo_x = x + dx
-        novo_y = y + dy
+        dx = random.choice(movimentos)
+        novo = robo + dx
         
-        if 0 <= novo_x < linhas and 0 <= novo_y < colunas:
-            robo = [novo_x, novo_y]
+        if 0 <= novo < campo:
+            robo = novo
 
     passos += 1
 
